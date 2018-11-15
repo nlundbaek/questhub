@@ -1,0 +1,43 @@
+
+
+<div class="container">
+  <form ngNativeValidate>
+    <div class="card bg-light">
+      <div class="card-title text-center mt-2">
+        <h4>Submit a question</h4>
+      </div>
+      <div class="card-body">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" [(ngModel)] = "name" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name" required>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" [(ngModel)] = "title" class="form-control" id="title" name="title" placeholder="Title" required>
+    </div>
+    <div class="form-group">
+      <label for="question">Question</label>
+      <textarea type="text" [(ngModel)] = "question" class="form-control" id="question" name="question" placeholder="Please help me with...." required></textarea>
+    </div>
+    <button (click)="addQuestion()" class="btn btn-success float-right">Submit</button>
+    </div>
+</div>
+  </form>
+
+
+
+
+<div class="card mt-3 bg-light" *ngFor="let question of QuestionService.questions index as i">
+  <div class="card-body">
+    <h5 class="card-title">{{question.title}}</h5>
+    <p class="card-text">{{question.question.slice(0,200)}}
+      <span *ngIf="question.question.length > 200">...</span>
+      <a href="question/{{i}}" class="btn btn-primary float-right">read more</a>
+    </p>
+
+    <div class="card-footer text-muted">
+      {{question.name}}, {{question.timestamp|date: 'MMM d, y, h:mm a' }}
+    </div>
+  </div>
+</div>
+</div>
